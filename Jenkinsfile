@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'gradle:6.7-jdk11'
+                    image 'alpine:latest'
                     // Run the container on the node specified at the
                     // top-level of the Pipeline, in the same workspace,
                     // rather than on a new node entirely:
@@ -14,12 +14,15 @@ pipeline {
             }
             steps {
                 echo 'Building..'
-                sh 'gradle --version'
+                sh 'ls'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh 'cat /proc/uptime'
+                sh 'cat /proc/cpuinfo'
+                sh 'cat /proc/meminfo'
             }
         }
         stage('Deploy') {
